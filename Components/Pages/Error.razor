@@ -1,0 +1,36 @@
+﻿@page "/Error"
+@using System.Diagnostics
+
+<PageTitle>Erro</PageTitle>
+
+<h1 class="text-danger">Ocorreu um erro.</h1>
+<h2 class="text-danger">Não foi possível processar sua solicitação.</h2>
+
+@if (ShowRequestId)
+{
+    <p>
+        <strong>Identificador da solicitação:</strong> <code>@RequestId</code>
+    </p>
+}
+
+<h3>Modo de desenvolvimento</h3>
+<p>
+    No ambiente <strong>Development</strong>, informações mais detalhadas sobre o erro serão exibidas.
+</p>
+<p>
+    <strong>Não habilite o ambiente Development em aplicações publicadas.</strong>
+    Isso pode exibir informações sensíveis sobre as exceções aos usuários.
+    Para depurar localmente, configure a variável de ambiente <strong>ASPNETCORE_ENVIRONMENT</strong> como <strong>Development</strong>
+    e reinicie a aplicação.
+</p>
+
+@code{
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    private string? RequestId { get; set; }
+    private bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+    protected override void OnInitialized() =>
+        RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+}

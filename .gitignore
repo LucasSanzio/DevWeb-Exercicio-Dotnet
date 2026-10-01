@@ -1,0 +1,29 @@
+## Build output
+bin/
+obj/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## IDE settings
+.vs/
+.vscode/
+
+## Local secrets and environment settings
+appsettings.Local.json
+.env
+.env.*
+!.env.example
+
+## OS files
+Thumbs.db
+.DS_Store
+
+# Keep only the Bootstrap stylesheet referenced by App.razor.
+wwwroot/lib/bootstrap/dist/*
+!wwwroot/lib/bootstrap/dist/css/
+wwwroot/lib/bootstrap/dist/css/*
+!wwwroot/lib/bootstrap/dist/css/bootstrap.min.css
